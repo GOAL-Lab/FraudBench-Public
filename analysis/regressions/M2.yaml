@@ -1,0 +1,66 @@
+# =============================================================================
+# M2  --  Reasoning-tokens variant of M1
+# =============================================================================
+# Paper: Appendix "Full Results > Regressions > M2". LLM generations with an
+# observed, strictly positive reasoning-token count only. The M1 predictor is
+# inherited with the reasoning-enabled main effect removed (reasoning is on
+# for every retained row) and a standardized log-reasoning-token slope plus
+# its high-reasoning-ablation interaction are added. Indices, model-level
+# arrays and the token standardization are rebuilt on the retained rows.
+#
+#   Step 3 -- per-run processing (after M1-base Steps 1-2):
+#     uv run hibayes-process --config analysis/regressions/M2.yaml \
+#         --analysis-state analysis/regressions/out/M1-base/processed \
+#         --out analysis/regressions/out/M2/processed
+#
+#   Step 4 -- fit (four NUTS chains):
+#     uv run hibayes-model --config analysis/regressions/M2.yaml \
+#         --analysis-state analysis/regressions/out/M2/processed \
+#         --out analysis/regressions/out/M2
+#
+# Outputs land in analysis/regressions/out/M2/models/fraudbench_m2/.
+# =============================================================================
+platform:
+  device_type: gpu
+  gpu_memory_fraction: 0.9
+  num_devices: 4          # one NUTS chain per GPU; omit to auto-detect (HiBayes then runs all chains vectorized on one GPU)
+  chain_method: parallel
+
+data_loader:
+  paths:
+    extracted_data:
+      - data/final/obs_data.parquet
+
+data_process:
+  path:
+    - src/fraudbench/analysis/regressions/process.py
+  processors:
+    - filter_ai_only
+    - filter_reasoning_tokens_positive
+    - filter_outcome_observed:
+        outcome_column: "score_fraud"
+    - build_fraudbench_indices
+    - select_outcome:
+        outcome_column: "score_fraud"
+
+model:
+  path: src/fraudbench/analysis/regressions/models.py
+  models:
+    - name: fraudbench_m2
+      config:
+        fit:
+          chains: 4
+
+check:
+  path:
+    - src/fraudbench/analysis/regressions/checkers.py
+  checkers:
+    - r_hat:
+        threshold: 1.05
+    - divergences
+    - ess_bulk
+    - ess_tail
+    - posterior_predictive:
+        num_samples: 2000
+
+# communicate: intentionally omitted (hibayes-model does not run communicators).

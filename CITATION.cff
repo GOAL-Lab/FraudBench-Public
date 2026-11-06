@@ -1,0 +1,96 @@
+cff-version: 1.2.0
+message: "If you use FraudBench, please cite the paper below. Final publication details will be added once available."
+title: "FraudBench: A Legal Evaluation of AI Deception"
+type: dataset
+authors:
+  - family-names: Wei
+    given-names: Kevin
+  - family-names: Adan
+    given-names: Sumaya Nur
+  - family-names: Llerena
+    given-names: Stephan
+  - family-names: Gitau
+    given-names: Mark
+  - family-names: Merane
+    given-names: Jakob
+  - family-names: Srinivasan
+    given-names: Anita
+  - family-names: Le Brannan
+    given-names: Colette
+  - family-names: Kleiner
+    given-names: Keethan
+  - family-names: Tacconelli
+    given-names: Alessandro
+  - family-names: Tiu
+    given-names: Michael
+    name-suffix: Jr.
+  - family-names: Thomason
+    given-names: Case
+  - family-names: Emili
+    given-names: Kyle
+  - family-names: Gadowska
+    given-names: Natasza
+  - family-names: Mark
+    given-names: Alex
+  - family-names: Ren
+    given-names: Eric
+  - family-names: Bhatt
+    given-names: Umang
+  - family-names: Singh
+    given-names: Jatinder
+  - family-names: Anthis
+    given-names: Jacy Reese
+  - family-names: Bloomfield
+    given-names: Doni
+  - family-names: Kolt
+    given-names: Noam
+version: "0.1.0"
+preferred-citation:
+  type: conference-paper
+  title: "FraudBench: A Legal Evaluation of AI Deception"
+  year: 2026
+  conference:
+    name: "Advances in Neural Information Processing Systems (NeurIPS 2026)"
+  notes: "Accepted at NeurIPS 2026; proceedings details and DOI to be added."
+  authors:
+    - family-names: Wei
+      given-names: Kevin
+    - family-names: Adan
+      given-names: Sumaya Nur
+    - family-names: Llerena
+      given-names: Stephan
+    - family-names: Gitau
+      given-names: Mark
+    - family-names: Merane
+      given-names: Jakob
+    - family-names: Srinivasan
+      given-names: Anita
+    - family-names: Le Brannan
+      given-names: Colette
+    - family-names: Kleiner
+      given-names: Keethan
+    - family-names: Tacconelli
+      given-names: Alessandro
+    - family-names: Tiu
+      given-names: Michael
+      name-suffix: Jr.
+    - family-names: Thomason
+      given-names: Case
+    - family-names: Emili
+      given-names: Kyle
+    - family-names: Gadowska
+      given-names: Natasza
+    - family-names: Mark
+      given-names: Alex
+    - family-names: Ren
+      given-names: Eric
+    - family-names: Bhatt
+      given-names: Umang
+    - family-names: Singh
+      given-names: Jatinder
+    - family-names: Anthis
+      given-names: Jacy Reese
+    - family-names: Bloomfield
+      given-names: Doni
+    - family-names: Kolt
+      given-names: Noam

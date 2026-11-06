@@ -1,0 +1,4 @@
+{"key": "closed", "display_name": "Binary", "order": 0, "is_human": false}
+{"key": "open", "display_name": "Open", "order": 1, "is_human": false}
+{"key": "agentic", "display_name": "Agentic", "order": 2, "is_human": false}
+{"key": "human_baseline", "display_name": "Human Baseline", "order": 3, "is_human": true}

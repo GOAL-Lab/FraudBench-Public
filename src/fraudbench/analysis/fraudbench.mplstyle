@@ -1,0 +1,57 @@
+# Fraudbench paper figure style.
+# Loaded by fraudbench.analysis.style.setup_plot_style() via plt.style.use().
+# This is the single source of truth for matplotlib rcParams in fraudbench
+# figures. Do not duplicate these settings in plotting code.
+
+# ---- Fonts ------------------------------------------------------------------
+font.family:        sans-serif
+font.sans-serif:    Arial, Helvetica, DejaVu Sans
+
+axes.labelsize:     18
+axes.titlesize:     16
+xtick.labelsize:    16
+ytick.labelsize:    18
+legend.fontsize:    14
+
+axes.labelweight:   bold
+axes.titleweight:   bold
+
+# ---- Spines & axes ----------------------------------------------------------
+axes.spines.top:    False
+axes.spines.right:  False
+axes.spines.left:   True
+axes.spines.bottom: True
+axes.edgecolor:     black
+axes.linewidth:     0.8
+
+# ---- Grid (matches sns whitegrid + dashed y grid) --------------------------
+axes.grid:          True
+axes.grid.axis:     y
+axes.axisbelow:     True
+grid.linestyle:     --
+grid.linewidth:     0.8
+grid.color:         "#CCCCCC"
+grid.alpha:         0.7
+
+# ---- Bars / patches ---------------------------------------------------------
+patch.linewidth:    0
+patch.edgecolor:    none
+
+# ---- Legend -----------------------------------------------------------------
+legend.framealpha:  0.9
+legend.edgecolor:   "#CCCCCC"
+legend.fancybox:    True
+
+# ---- Figure / saving --------------------------------------------------------
+figure.dpi:         150
+figure.facecolor:   white
+figure.edgecolor:   white
+
+savefig.dpi:        300
+
+# Embed text as TrueType (Type 42) rather than Type 3 in vector output so PDF
+# figures keep selectable text and pass venue font checks. No visual change.
+pdf.fonttype:       42
+savefig.bbox:       tight
+savefig.facecolor:  white
+savefig.edgecolor:  white
