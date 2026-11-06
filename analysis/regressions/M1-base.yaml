@@ -1,0 +1,36 @@
+# =============================================================================
+# M1-base  --  Shared load + merge state for the M1 / M2 / M3 regression runs
+# =============================================================================
+# Loads data/final/obs_data.parquet once and joins the scenario, model and
+# human-respondent metadata. Every per-run config (M1, M2, M3) starts from the
+# processed state written here, applies its own row filters, rebuilds the
+# indices on the retained rows, and selects its outcome.
+#
+# Step 1 -- load raw data (run once):
+#   uv run hibayes-load --config analysis/regressions/M1-base.yaml \
+#       --out analysis/regressions/out/M1-base/loaded
+#
+# Step 2 -- shared merges (run once):
+#   uv run hibayes-process --config analysis/regressions/M1-base.yaml \
+#       --analysis-state analysis/regressions/out/M1-base/loaded \
+#       --out analysis/regressions/out/M1-base/processed
+#
+# Then see M1.yaml / M2.yaml / M3.yaml for Steps 3 + 4.
+# =============================================================================
+platform:
+  device_type: gpu
+  gpu_memory_fraction: 0.9
+  chain_method: parallel
+
+data_loader:
+  paths:
+    extracted_data:
+      - data/final/obs_data.parquet
+
+data_process:
+  path:
+    - src/fraudbench/analysis/regressions/merge_external.py
+  processors:
+    - merge_scenario_metadata
+    - merge_model_metadata
+    - merge_human_baseline_metadata

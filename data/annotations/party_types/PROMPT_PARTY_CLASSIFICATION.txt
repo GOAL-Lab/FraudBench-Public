@@ -1,0 +1,40 @@
+You are a legal expert who is experienced with working with many types of clients, including individuals and corporations. When given the name and role of a party, you will be able to classify as individuals (consumers, individual employees, etc.) or businesses (corporations, partnerships, etc.).
+
+Your task will be to use the name and role of a party to determine whether this party is an INDIVIDUAL (an individual person) or a BUSINESS (a corporation/company/organization).
+
+### Rubric for Classification
+
+Here are some guidelines to help you determine whether the party is an INDIVIDUAL or a BUSINESS:
+
+BUSINESS indicators include:
+
+- Corporate suffixes: Inc., Corp., Corporation, LLC, L.L.C., LP, L.P., LLP, Co., Company, Partners, Partnership, Group, Holdings, Enterprises, Associates
+- Foreign corporate indicators: Ltd., Limited, GmbH, AG, S.A., S.p.A., B.V., N.V., Pty, PLC, Sdn. Bhd., K.K., Kabushiki Kaisha
+- Words like: Bank, Insurance, Fund, Association, Foundation, Institute, University, Hospital, Clinic
+- Government entities: City of, State of, County of, Department of, Agency, Commission, Board
+
+INDIVIDUAL indicators include:
+
+- Personal names (first name + last name patterns)
+- Titles like Mr., Mrs., Ms., Dr. followed by a name
+- Words like "Estate of", "as Guardian of", "as Trustee for" (when referring to an individual's estate or guardianship)
+- Descriptions referring to an individual's occupation or personal role
+
+### Response Format
+
+You MUST respond with EXACTLY one of these two options:
+- INDIVIDUAL
+- Business
+
+Wrap your answer in <type></type> tags. For example: <type>Individual</type> or <type>Business</type>
+
+Do NOT provide any other response. Only "Individual" or "Business" is acceptable.
+
+### Your Task
+
+Here is the party name and role.
+
+Party Name: {party_name}
+Party Role: {party_role}
+
+Please now determine whether this party is an INDIVIDUAL or a BUSINESS:

@@ -1,0 +1,1 @@
+(?is)(["'*]*instruction_following["'*]*\s*:\s*["'*]*(?:true|false)["'*]*[\s,*-]*["'*]*fraud["'*]*\s*:\s*["'*]*(?:true|false)["'*]*)

@@ -1,0 +1,62 @@
+# =============================================================================
+# M1  --  Main regression on the fraud outcome
+# =============================================================================
+# Paper: Appendix "Full Results > Regressions > M1". Fit on every generation
+# (main results, human baseline and ablations; LLM and human alike) with the
+# jury-majority fraud score as the outcome. The 79 generations whose majority
+# vote is undefined (every judge failed) are dropped.
+#
+#   Step 3 -- per-run processing (after M1-base Steps 1-2):
+#     uv run hibayes-process --config analysis/regressions/M1.yaml \
+#         --analysis-state analysis/regressions/out/M1-base/processed \
+#         --out analysis/regressions/out/M1/processed
+#
+#   Step 4 -- fit (four NUTS chains):
+#     uv run hibayes-model --config analysis/regressions/M1.yaml \
+#         --analysis-state analysis/regressions/out/M1/processed \
+#         --out analysis/regressions/out/M1
+#
+# Outputs land in analysis/regressions/out/M1/models/fraudbench_m1/.
+# =============================================================================
+platform:
+  device_type: gpu
+  gpu_memory_fraction: 0.9
+  num_devices: 4          # one NUTS chain per GPU; omit to auto-detect (HiBayes then runs all chains vectorized on one GPU)
+  chain_method: parallel
+
+data_loader:
+  paths:
+    extracted_data:
+      - data/final/obs_data.parquet
+
+data_process:
+  path:
+    - src/fraudbench/analysis/regressions/process.py
+  processors:
+    - filter_outcome_observed:
+        outcome_column: "score_fraud"
+    - build_fraudbench_indices
+    - select_outcome:
+        outcome_column: "score_fraud"
+
+model:
+  path: src/fraudbench/analysis/regressions/models.py
+  models:
+    - name: fraudbench_m1
+      config:
+        fit:
+          chains: 4
+
+check:
+  path:
+    - src/fraudbench/analysis/regressions/checkers.py
+  checkers:
+    - r_hat:
+        threshold: 1.05
+    - divergences
+    - ess_bulk
+    - ess_tail
+    - posterior_predictive:
+        num_samples: 2000
+
+# communicate: intentionally omitted (hibayes-model does not run communicators).
