@@ -912,7 +912,7 @@ def _caption(
     )
     return (
         "Accuracy and reliability of the three-member LLM-as-a-judge jury used in evaluation, as compared to human annotations. "
-        "We report various agreement metrics, as well as we also report observed agreement (fraction of matching labels) and "
+        "We report various agreement metrics, as well as observed agreement (fraction of matching labels) and "
         "rate of positive prevalence (rate of positive labels for each score). "
         "Generations with judge errors are excluded from analysis."
     )
