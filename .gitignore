@@ -1,3 +1,4 @@
 # Dataset distributed through Hugging Face
 /data/final/dataset_public.jsonl
 /data/final/.cache/huggingface/
+.env
