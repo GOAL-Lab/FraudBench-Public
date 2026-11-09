@@ -45,6 +45,7 @@ from fraudbench.utils import (
     read_tuple_def,
     setup_logger,
 )
+from fraudbench.canary import CANARY
 from fraudbench.utils import globals
 from fraudbench.utils.surgery_kits import (
     SurgeryKitModule,
@@ -389,6 +390,7 @@ def _build_output_records(
         ]
         summary_id = source_record["summary_id"]
         output_record: dict[str, Any] = {
+            "canary": CANARY,
             "summary_id": summary_id,
             "seed": _seed_payload(source_record),
             "judge_scores": judge_scores,

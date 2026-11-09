@@ -277,6 +277,9 @@ def main(
         dry_run: If True, do not write files; just report what would be written.
     """
     repo = Path(repo_root).resolve()
+    _ensure_src_on_path(repo)
+    from fraudbench.canary import mark_latex_export
+
     manifest_p = (repo / manifest_path).resolve()
     if not manifest_p.exists():
         raise FileNotFoundError(f"Manifest not found: {manifest_p}")
@@ -313,7 +316,7 @@ def main(
             skipped.append(rel_out)
             continue
 
-        _write_text(out_path, _wrap_promptlisting(text))
+        _write_text(out_path, mark_latex_export(_wrap_promptlisting(text)))
         written.append(rel_out)
 
     summary = {

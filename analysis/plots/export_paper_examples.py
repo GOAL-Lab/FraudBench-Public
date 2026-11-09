@@ -73,6 +73,7 @@ import numpy as np
 import pandas as pd
 from jsonargparse import ArgumentParser
 
+from fraudbench.canary import CANARY, mark_latex_export
 from fraudbench.analysis.common import (
     available_parquet_columns,
     get_model_display_name,
@@ -1115,6 +1116,7 @@ def main(
             print(f"WARNING: obs_parquet not found at {obs_path}", file=sys.stderr)
 
     manifest: dict[str, Any] = {
+        "canary": CANARY,
         # Paths are recorded relative to the repo root so the committed
         # manifest carries no machine-specific absolute paths.
         "repo_root": ".",
@@ -1180,7 +1182,7 @@ def main(
                 continue
             if out_path.exists() and not overwrite:
                 continue
-            _write_text(out_path, payload)
+            _write_text(out_path, mark_latex_export(payload))
 
     if not dry_run:
         manifest_p.parent.mkdir(parents=True, exist_ok=True)
